@@ -1,0 +1,1 @@
+"""The IMAP Attachment component."""
