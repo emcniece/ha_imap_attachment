@@ -2,6 +2,7 @@
   "domain": "imap_attachment",
   "name": "IMAP Attachment Sensor",
   "documentation": "https://github.com/emcniece/ha_imap_attachment",
-  "requirements": [""],
-  "codeowners": ["@emcniece"]
+  "requirements": [],
+  "codeowners": ["@emcniece"],
+  "version": "2022.01.25"
 }
