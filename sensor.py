@@ -268,7 +268,19 @@ class EmailContentSensor(Entity):
         attachments = []
         for i in range(1, len(email_message.get_payload())):
             attachment = email_message.get_payload()[i]
-            filename = attachment.get_filename()
+
+            try:
+                # Skip any attachments that aren't file-ish
+                if part.get_content_maintype() == 'multipart':
+                    continue
+                if part.get('Content-Disposition') is None:
+                    continue
+
+                filename = attachment.get_filename()
+            except Exception as e:
+                _LOGGER.error(f"Unexpected imap attachment: {attachment}")
+                raise e
+
             fullpath = os.path.join(storage_path, filename)
             open(fullpath, 'wb').write(attachment.get_payload(decode=True))
             attachments.append(fullpath)
