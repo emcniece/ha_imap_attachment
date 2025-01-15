@@ -70,6 +70,19 @@ sensor:
     password: hunter2
     senders:
       - noreply@somedomain.com
+
+trigger:
+  trigger: event
+  event_type: "imap_attachment"
+  id: "custom_event"
+  sensor:
+  name: Email Content
+  state: "{{ trigger.event.data['subject'] }}"
+  attributes:
+  Sender: "{{ trigger.event.data['from'] }}"
+  Date: "{{ trigger.event.data['date'] }}"
+  Body: "{{ trigger.event.data['body'] }}"
+  Attachments: "{{ trigger.event.data['attachments'] }}"
 ```
 
 ## Implementation Example
